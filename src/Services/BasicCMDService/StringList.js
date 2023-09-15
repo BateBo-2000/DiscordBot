@@ -1,0 +1,20 @@
+module.exports = [
+    "you are monkey",
+    "umri ot rak",
+    "pichka ti lilina",
+    "da ti eba maikata",
+    "you retard",
+    "kys",
+    "candy",
+    "take a shower",
+    "ur stinky",
+    "your mom is whore",
+    "ur a whore",
+    "ur a pedofile",
+    "ur a bozo",
+    "hope you family doensn't die in an accident involving me ;)",
+    "hope you father dies in an accident involving prostate exams",
+    "hope you mother dies in an accident involving sudomia",
+    "you are the human equivalent of a participation trophy",
+    "your birth certificate is an apology from the abortion clinic"
+]
