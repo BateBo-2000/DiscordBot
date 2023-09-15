@@ -22,7 +22,11 @@ function create(userId, username, channelId, channelName) {
         console.error(`Error saving ${username}'s session: ${err}`)
     }
 }
-async function addAction (userId ,channelId, channelName, action, actionDescription, username) {
+async function addAction (state, action, actionDescription) {
+    userId =  state.member.user.id
+    channelId = state.channel.id
+    channelName = state.channel.name
+    username = state.member.user.name
     try {
         const session = await SessionModel.findOne({userId}).sort({sessionStart: -1}).limit(1)
         if(!session){
@@ -37,22 +41,22 @@ async function addAction (userId ,channelId, channelName, action, actionDescript
             actionDescription: actionDescription
         })
         await session.save()
-        console.log(`Action added for user: `+ username)  
+        console.log(`Action added for user ${username} in server ${state.guild.name}`)  
     } catch (error) {
         console.log('Error while adding action for user: '+ username);
     }
 }
 
-async function addExperience(userId) {
+async function addExperience(userId, serverId) {
     try { 
         const session = await SessionModel.findOne({userId}).sort({sessionStart: -1}).limit(1)
         if(!session){
             console.log(`Can't find the session for user: +${userId}`)
             return;
         } 
-        const user = await UserModel.findOne({ id: userId })
+        const user = await UserModel.findOne({ id: userId, serverId: serverId })
         if (!user) {
-            console.log(`User with userId ${userId} not found.`)
+            console.log(`User with userId ${userId} not found in server ${serverId}`)
             return;
         }
         const newXP = xpCalculator(session.actions)

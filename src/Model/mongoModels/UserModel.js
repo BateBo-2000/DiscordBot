@@ -23,10 +23,6 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    globalName: {
-        type: String,
-        required: true,
-    },
     avatar: {
         type: String,
         required: true,
@@ -82,6 +78,16 @@ const userSchema = new Schema({
     experience: {
         type: Number,
         default: 0
+    },
+    serverId: {
+        type: String,
+        required:true,
+        default:"820441979971960863"
+    },
+    serverName: {
+        type: String,
+        required:true,
+        default:"Килера"
     }
 });
 

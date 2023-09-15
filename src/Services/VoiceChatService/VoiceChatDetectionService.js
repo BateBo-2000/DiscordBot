@@ -18,22 +18,16 @@ module.exports = (oldState, newState) => {
 function ServerMuteAction(oldState, newState) {
     if (oldState.serverMute === false && newState.serverMute === true) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `+serverMute`, 
-               `${newState.member.user.username} was server-muted in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} was server-muted in voice channel ${newState.channel.name}`
           )
     }
     if (oldState.serverMute === true && newState.serverMute === false) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `-serverMute`, 
-               `${newState.member.user.username} was unmuted from the server in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} was unmuted from the server in voice channel ${newState.channel.name}`
           )
     }
 }
@@ -41,22 +35,16 @@ function ServerMuteAction(oldState, newState) {
 function ServerDeafAction(oldState, newState) {
     if (oldState.serverDeaf === false && newState.serverDeaf === true) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `+serverDeaf`, 
-               `${newState.member.user.username} was server-deafened in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} was server-deafened in voice channel ${newState.channel.name}`
           )
     }
     if (oldState.serverDeaf === true && newState.serverDeaf === false) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `-serverDeaf`, 
-               `${newState.member.user.username} was undeafened from the server in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} was undeafened from the server in voice channel ${newState.channel.name}`
           )
     }
 }
@@ -64,22 +52,16 @@ function ServerDeafAction(oldState, newState) {
 function SelfMuteAction(oldState, newState) {
     if (oldState.selfMute === false && newState.selfMute === true && newState.selfDeaf === false) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `+mute`, 
-               `${newState.member.user.username} self-muted in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} self-muted in voice channel ${newState.channel.name}`
           )
     }
     if (oldState.selfMute === true && newState.selfMute === false) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `-mute`, 
-               `${newState.member.user.username} self-unmuted in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} self-unmuted in voice channel ${newState.channel.name}`
           )
     }
 }
@@ -87,29 +69,23 @@ function SelfMuteAction(oldState, newState) {
 function SelfDeafAction(oldState, newState) {
     if (oldState.selfDeaf === false && newState.selfDeaf === true) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `+deaf`, 
-               `${newState.member.user.username} self-deafened in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} self-deafened in voice channel ${newState.channel.name}`
           )
     }
     if (oldState.selfDeaf === true && newState.selfDeaf === false) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `-deaf`, 
-               `${newState.member.user.username} self-undeafened in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} self-undeafened in voice channel ${newState.channel.name}`
           )
     }
 }
 
 async function MovementAction(oldState, newState) {
      if (oldState.channel !== newState.channel && !oldState.channel) {
-          addUserIfMissing(newState.member.user.id, newState.member)
+          addUserIfMissing(newState)
           create(
                newState.member.user.id, 
                newState.member.user.username, 
@@ -117,57 +93,39 @@ async function MovementAction(oldState, newState) {
                newState.channel.name
           )
           if(newState.selfMute) addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `+mute`, 
-               `${newState.member.user.username} joined self-mute in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} joined self-mute in voice channel ${newState.channel.name}`
           )
           if(newState.selfDeaf) addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `+deaf`, 
-               `${newState.member.user.username} joined self-deaf in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} joined self-deaf in voice channel ${newState.channel.name}`
           )
           if(newState.serverMute) addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `+serverMute`, 
-               `${newState.member.user.username} joined server-muted in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} joined server-muted in voice channel ${newState.channel.name}`
           )
           if(newState.serverDeaf) addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `+serverDeaf`, 
-               `${newState.member.user.username} joined server-deafed in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} joined server-deafed in voice channel ${newState.channel.name}`
           )
      }
     if (oldState.channel !== newState.channel && !newState.channel) {
           await addAction(
-               oldState.member.user.id, 
-               oldState.channel.id, 
-               oldState.channel.name,
+               oldState,
                `left`, 
                `${oldState.member.user.username} has left channel ${oldState.channel.name}`,
-               newState.member.user.username
           )
-          addExperience(oldState.member.user.id)
+          addExperience(oldState.member.user.id, oldState.guild.id)
     }
     if (oldState.channel !== newState.channel && oldState.channel && newState.channel) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `moved`, 
-               `${newState.member.user.username} has been moved from channel ${oldState.channel.name} to ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} has been moved from channel ${oldState.channel.name} to ${newState.channel.name}`
           )
     }
 }
@@ -175,22 +133,16 @@ async function MovementAction(oldState, newState) {
 function SelfVideoAction(oldState, newState) {
     if (oldState.selfVideo === false && newState.selfVideo === true) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `+video`, 
-               `${newState.member.user.username} started camera in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} started camera in voice channel ${newState.channel.name}`
           )
     }
     if (oldState.selfVideo === true && newState.selfVideo === false) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `-video`, 
-               `${newState.member.user.username} stopped camera in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} stopped camera in voice channel ${newState.channel.name}`
           )
     }
 }
@@ -198,22 +150,16 @@ function SelfVideoAction(oldState, newState) {
 function StreamingAction(oldState, newState) {
     if (oldState.streaming === false && newState.streaming === true) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `+stream`, 
-               `${newState.member.user.username} started streaming in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} started streaming in voice channel ${newState.channel.name}`
           )
     }
     if (oldState.streaming === true && newState.streaming === false) {
           addAction(
-               newState.member.user.id, 
-               newState.channel.id, 
-               newState.channel.name,
+               newState,
                `-stream`, 
-               `${newState.member.user.username} stopped streaming in voice channel ${newState.channel.name}`,
-               newState.member.user.username
+               `${newState.member.user.username} stopped streaming in voice channel ${newState.channel.name}`
           )
     }
 }
