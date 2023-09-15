@@ -15,13 +15,21 @@ module.exports = (userActions) => {
     if(positiveEffects < negativeEffects) negativeEffects = positiveEffects
     const timeWithEffects = positiveEffects - negativeEffects
     const XP = Math.floor(timeWithEffects/1000)
-    return XP
+    return {
+        XP:XP,
+        timeInChat:timeInTheChat,
+        timeMuted:timeMuted,
+        timeDeafed:timeDeafed,
+        timeServerMuted:timeServerMuted,
+        timeServerDeafed:timeServerDeafed,
+        timeVideo:timeVideo,
+        timeStreaming:timeStreaming
+    }
 } 
 
 function findActionIndex (userActions, action) {
     return userActions.findIndex(obj => obj.action === action)
 }
-
 // function timeline (userActions) {
 //     const timeline = []
 //     const timelineTimeZero = userActions[0].timestamp

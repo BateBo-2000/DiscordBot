@@ -45,6 +45,16 @@ const sessionSchema = new Schema({
         type: [actionSchema],
         required: true
     },
+    serverId: {
+        type: String,
+        required: true
+    },
+    serverName: {
+        type: String,
+        required: true
+    }
+
+
 })
 
 const SessionModel = mongoose.model('Session', sessionSchema);

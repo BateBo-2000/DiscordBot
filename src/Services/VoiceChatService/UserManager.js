@@ -5,7 +5,6 @@ async function addUserIfMissing(newState) {
         console.log(`Invalid newState.member for userId: ${newState.member.user.id}`)
         return;
     }
-
     if (await isUserAdded(newState.member.user.id, newState.guild.id) === false) {
         const newUser = new UserModel({
             id: newState.member.user.id,
@@ -31,7 +30,7 @@ async function addUserIfMissing(newState) {
 }
 
 async function isUserAdded(userId, guildId) {
-    const user = await UserModel.findOne({ id: userId, server: guildId })
+    const user = await UserModel.findOne({ id: userId, serverId: guildId })
     return !!user
 }
 

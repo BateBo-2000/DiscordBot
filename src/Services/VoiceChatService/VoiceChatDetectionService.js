@@ -86,12 +86,7 @@ function SelfDeafAction(oldState, newState) {
 async function MovementAction(oldState, newState) {
      if (oldState.channel !== newState.channel && !oldState.channel) {
           addUserIfMissing(newState)
-          create(
-               newState.member.user.id, 
-               newState.member.user.username, 
-               newState.channel.id, 
-               newState.channel.name
-          )
+          create(newState)
           if(newState.selfMute) addAction(
                newState,
                `+mute`, 

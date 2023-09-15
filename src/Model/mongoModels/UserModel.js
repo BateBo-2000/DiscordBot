@@ -88,6 +88,26 @@ const userSchema = new Schema({
         type: String,
         required:true,
         default:"Килера"
+    },
+    timeVoiceChat: {
+        type: Number,
+        default: 1
+    },
+    timeDeafedOrMute: {
+        type: Number,
+        default: 1
+    },
+    timeStreaming: {
+        type: Number,
+        default: 1
+    },
+    timeVideo: {
+        type: Number,
+        default: 1
+    },
+    messagesSent: {
+        type: Number,
+        default: 1
     }
 });
 
