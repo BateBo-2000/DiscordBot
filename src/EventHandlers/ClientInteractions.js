@@ -17,4 +17,9 @@ module.exports = (client) => {
             xpCommandHandler(msg)
         } 
     })
+    client.on('interactionCreate', msg => {
+        if(msg.commandName === 'stats'){
+            xpCommandHandler(msg)
+        } 
+    })
 }
