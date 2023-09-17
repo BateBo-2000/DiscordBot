@@ -65,7 +65,7 @@ async function addExperience(userId, serverId) {
         const sessionStats = statsCalculator(session.actions)
         console.log(sessionStats);
         const newXP = sessionStats.XP
-        const newtimeInChat = sessionStats.newtimeInChat
+        const newtimeInChat = sessionStats.timeInChat
         const timeMutedOrDeafed =  sessionStats.timeMuted + sessionStats.timeServerMuted + sessionStats.timeServerDeafed + sessionStats.timeDeafed
         const timeVideo = sessionStats.timeVideo
         const timeStreaming = sessionStats.timeStreaming
