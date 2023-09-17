@@ -63,7 +63,7 @@ async function addExperience(userId, serverId) {
             return;
         }
         const sessionStats = statsCalculator(session.actions)
-        console.log(sessionStats);
+        console.log("Session stats: ", sessionStats);
         const newXP = sessionStats.XP
         const newtimeInChat = sessionStats.timeInChat
         const timeMutedOrDeafed =  sessionStats.timeMuted + sessionStats.timeServerMuted + sessionStats.timeServerDeafed + sessionStats.timeDeafed

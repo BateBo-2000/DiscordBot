@@ -49,7 +49,6 @@ function timeInAction (userActions, action){
             if(endTime === 0){
                 endTime = userActions[userActions.length-1].timestamp*1
             }
-            console.log(endTime,startTime,time);
             time += endTime - startTime
         }
     });
