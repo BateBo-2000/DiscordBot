@@ -1,4 +1,5 @@
 const {RandomRule34Image, Rule34Tagged} = require('../Services/R34Service.js/Rule34Service')
+const StatsService = require('../Services/statsService.js/StatsService')
 const xpCommandHandler = require('./../Services/VoiceChatService/XpCommandHandler')
 module.exports = (client) => {
     // r34 cmd
@@ -19,7 +20,7 @@ module.exports = (client) => {
     })
     client.on('interactionCreate', msg => {
         if(msg.commandName === 'stats'){
-            xpCommandHandler(msg)
+            StatsService(msg)
         } 
     })
 }

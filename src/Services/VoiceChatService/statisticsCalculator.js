@@ -6,9 +6,7 @@ module.exports = (userActions) => {
     const timeServerDeafed = timeInAction(userActions, 'serverDeaf')
     const timeVideo = timeInAction(userActions, 'video')
     const timeStreaming = timeInAction(userActions, 'stream')
-
     //the Xp formula
-    
     let negativeEffects = timeMuted + timeDeafed + timeServerDeafed + timeServerMuted
     
     const positiveEffects = timeInTheChat + timeVideo*2 + timeStreaming
@@ -27,9 +25,6 @@ module.exports = (userActions) => {
     }
 } 
 
-function findActionIndex (userActions, action) {
-    return userActions.findIndex(obj => obj.action === action)
-}
 // function timeline (userActions) {
 //     const timeline = []
 //     const timelineTimeZero = userActions[0].timestamp
@@ -39,23 +34,24 @@ function findActionIndex (userActions, action) {
 //     return timeline
 // }
 
-function timeInAction(userActions, action, time = 0){
-    let endIndex
-    if(findActionIndex(userActions,'+'+action) >= 0){
-        const startTime = userActions[findActionIndex(userActions,'+'+action)].timestamp 
-        if(findActionIndex(userActions,'-'+action) >= 0){
-            const endTime = userActions[findActionIndex(userActions,'-'+action)].timestamp
+function timeInAction (userActions, action){
+    let time = 0
+    userActions.forEach((element, index) => {
+        if(element.action === '+'+action){
+            let startTime = element.timestamp*1
+            let endTime = 0
+            for(let i = index+1; i < userActions.length; i++){
+                if(userActions[i].action === '-'+action){
+                    endTime = userActions[i].timestamp*1
+                    break
+                }
+            }
+            if(endTime === 0){
+                endTime = userActions[userActions.length-1].timestamp*1
+            }
+            console.log(endTime,startTime,time);
             time += endTime - startTime
-            endIndex = findActionIndex(userActions,'-'+action)
-        }else{
-            const endTime = userActions[findActionIndex(userActions,'left')].timestamp
-            time += endTime - startTime  
-        }  
-    }
-    if(!endIndex){
-        return time
-    }else{
-        const newUserActionsArray = userActions.slice(endIndex+1)
-        return timeInAction(newUserActionsArray, action, time)
-    } 
+        }
+    });
+    return time
 }

@@ -63,6 +63,7 @@ async function addExperience(userId, serverId) {
             return;
         }
         const sessionStats = statsCalculator(session.actions)
+        console.log(sessionStats);
         const newXP = sessionStats.XP
         const newtimeInChat = sessionStats.newtimeInChat
         const timeMutedOrDeafed =  sessionStats.timeMuted + sessionStats.timeServerMuted + sessionStats.timeServerDeafed + sessionStats.timeDeafed
@@ -79,7 +80,8 @@ async function addExperience(userId, serverId) {
         console.log(`Added ${newXP} experience and stats for user ${user.username}`)
         return;
     } catch (error) {
-        console.error(`Failed to add experience to user ${userId}: ${error}, SessionManager: addExperience`)
+        console.error(`Failed to add experience to user ${userId}: ${error}, SessionManager: addExperience
+        ${error}`)
     }
 }
 
