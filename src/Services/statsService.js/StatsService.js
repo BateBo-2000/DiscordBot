@@ -20,10 +20,10 @@ module.exports = async (msg) => {
             }
             name = user.username
         }
-        const timeVoiceChat = secondsToTime(user.timeVoiceChat)
-        const timeDeafedOrMute = secondsToTime(user.timeDeafedOrMute)
-        const timeVideo = secondsToTime(user.timeVideo)
-        const timeStreaming = secondsToTime(user.timeStreaming)
+        const timeVoiceChat = secondsToTime(user.timeVoiceChat/1000)
+        const timeDeafedOrMute = secondsToTime(user.timeDeafedOrMute/1000)
+        const timeVideo = secondsToTime(user.timeVideo/1000)
+        const timeStreaming = secondsToTime(user.timeStreaming/1000)
         
         const embed = new EmbedBuilder()
             .setTitle(`${name} has:`)
